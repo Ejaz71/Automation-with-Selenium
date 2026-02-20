@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -17,6 +18,8 @@ public class Login {
     String errorMessageLocator = "error"; //clss
     String rememberCheckboxLocator = ".checkbox-container #chkboxOne";
     String tncCheckboxLocator = ".checkbox-container #chkboxTwo";
+    String loginSuccessLocator = ".login-container p";
+    String logoutButtonLocator = "//button[@class='logout-btn']";
     //Forgot password fields
     String forgotPasswordLocator = "div.forgot-pwd-container a"; //css
     String nameFieldLocator = "//input[@placeholder = 'Name']"; //xpath
@@ -31,6 +34,7 @@ public class Login {
     String loginUserName = "Rahul";
     String wrongPassword = "abc123";
     String correctPassword = "rahulshettyacademy";
+    String loginConfirmationMessageExpected = "You are successfully logged in.";
     //forgot password form fields
     String testUserName = "Test User";
     String testUserEmail = "test.user@gmail.com";
@@ -91,5 +95,23 @@ public class Login {
         if (!checkBoxTwo.isSelected()) checkBoxTwo.click();
 
         driver.findElement(By.className(signInBtnLocator)).click();
+    }
+
+    public void logoutTest () {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        String loginConfirmationMessage = "";
+
+        customerLoginWithCorrectPass();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        loginConfirmationMessage = driver.findElement(By.cssSelector(loginSuccessLocator)).getText();
+
+        Assert.assertEquals(loginConfirmationMessage, loginConfirmationMessageExpected);
+
+        driver.findElement(By.xpath(logoutButtonLocator)).click();
+
     }
 }

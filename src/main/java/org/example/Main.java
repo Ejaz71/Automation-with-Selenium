@@ -39,9 +39,10 @@ public class Main {
 //        }
 
         Login loginObj = new Login();
-        loginObj.customerLoginWithIncorrectPass();
-        loginObj.resetPassword();
-        loginObj.customerLoginWithCorrectPass();
+//        loginObj.customerLoginWithIncorrectPass();
+//        loginObj.resetPassword();
+//        loginObj.customerLoginWithCorrectPass();
+        loginObj.logoutTest();
 
     }
 }
