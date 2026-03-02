@@ -29,7 +29,7 @@ public class Main {
 //
 //        int n = 1;
 //
-//        //edge
+//        //edgeR
 //        WebDriver driverEdge = new EdgeDriver();
 //        try {
 //            driverEdge.get("https://google.com");
